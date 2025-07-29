@@ -113,7 +113,7 @@ class _TvShowSearchScreenState extends State<TvShowSearchScreen> {
                               spacing: 32,
                               children: [
                                 Text(
-                                  'Nenhuma série encontrada!',
+                                  'Nenhuma série encontrada! ',
                                   style: TextStyle(fontSize: 24),
                                 ),
                                 ElevatedButton(
