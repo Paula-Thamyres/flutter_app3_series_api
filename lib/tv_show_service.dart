@@ -6,11 +6,8 @@ import 'package:http/http.dart' as http;
 import 'package:sqflite/sqflite.dart';
 
 class TvShowService {
-  late DatabaseService _databaseService = DatabaseService();
-
-  TvShowService() {
-    _databaseService = DatabaseService();
-  }
+  // Instância do serviço de banco de dados
+  late final DatabaseService _databaseService = DatabaseService();
 
   Future<List<TvShow>> getAll() async {
     final db = await _databaseService.database;
@@ -27,7 +24,7 @@ class TvShowService {
             name: map['name'] as String? ?? 'Desconhecido',
             webChannel: map['webChannel'] as String? ?? 'N/A',
             rating: (map['rating'] as num?)?.toDouble() ?? 0.0,
-            summary: map['summary'] as String? ?? 'Sem resumo disponível',
+            summary: map['summary'] as String? ?? 'Sem resumo disponível.',
           ),
         )
         .toList();

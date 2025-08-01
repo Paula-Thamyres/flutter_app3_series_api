@@ -55,7 +55,6 @@ class TvShowModel extends ChangeNotifier {
   String? _errorMessage;
 
   List<TvShow> get tvShows => _tvShows;
-
   bool get isLoading => _isLoading;
   String? get errorMessage => _errorMessage;
   bool get hasFavorites => _tvShows.isNotEmpty;
@@ -75,35 +74,59 @@ class TvShowModel extends ChangeNotifier {
     notifyListeners();
   }
 
+  // Carrega as séries favoritas do banco de dados
   Future<void> load() async {
     try {
       _setLoading(true);
       _setError(null);
       _tvShows = await _tvShowService.getAll();
     } catch (e) {
-      _setError('Falha ao carregar séries favoritos: ${e.toString()}');
+      _setError('Falha ao carregar séries favoritas: ${e.toString()}');
     } finally {
       _setLoading(false);
     }
   }
 
+  // Adiciona séries favoritas
   Future<void> addToFavorites(TvShow tvShow) async {
     await _tvShowService.insert(tvShow);
+    _tvShows.add(tvShow);
     notifyListeners();
   }
 
+  // Remove séries favoritas
   Future<void> removeFromFavorites(TvShow tvShow) async {
     await _tvShowService.delete(tvShow.id);
+    _tvShows.removeWhere((show) => show.id == tvShow.id);
     notifyListeners();
   }
 
+  // Verifica se uma série é favorita
   Future<bool> isFavorite(TvShow tvShow) async {
     try {
       return await _tvShowService.isFavorite(tvShow);
     } catch (e) {
-      _setError('Falha em verificar se é favorita ${e.toString()}');
+      _setError('Falha em verificar se é favorita: ${e.toString()}');
       return false;
     }
+  }
+
+  // Ordena as séries favoritas por nome
+  void sortByName(bool ascending) {
+    _tvShows.sort(
+      (a, b) => ascending ? a.name.compareTo(b.name) : b.name.compareTo(a.name),
+    );
+    notifyListeners();
+  }
+
+  // Ordena as séries favoritas por nota
+  void sortByRating(bool ascending) {
+    _tvShows.sort(
+      (a, b) => ascending
+          ? a.rating.compareTo(b.rating)
+          : b.rating.compareTo(a.rating),
+    );
+    notifyListeners();
   }
 
   // API

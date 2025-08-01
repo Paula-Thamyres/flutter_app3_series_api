@@ -24,14 +24,14 @@ class DatabaseService {
 
   Future _onCreate(Database db, int version) async {
     await db.execute('''
-    CREATE TABLE tv_shows (
-      id INTEGER PRIMARY KEY,
-      imageUrl TEXT,
-      name TEXT,
-      webChannel TEXT,
-      rating REAL,
-      summary TEXT
-    )
-''');
+      CREATE TABLE tv_shows (
+        id INTEGER PRIMARY KEY,
+        imageUrl TEXT,
+        name TEXT,
+        webChannel TEXT,
+        rating REAL,
+        summary TEXT
+      )
+    ''');
   }
 }

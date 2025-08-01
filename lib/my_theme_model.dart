@@ -2,8 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class MyThemeModel extends ChangeNotifier {
-
-  bool isDark = false;
+  bool isDark = true;
   MyTheme myTheme = MyTheme(color: Color(0xff8716d5));
   ThemeData get customTheme => myTheme.customTheme;
   ThemeData get customThemeDark => myTheme.customThemeDark;
@@ -48,10 +47,7 @@ class MyTheme {
           fontWeight: FontWeight.bold,
           color: colorScheme.onPrimary,
         ),
-        iconTheme: IconThemeData(
-          color: colorScheme.onPrimary,
-          size: 36,
-        ),
+        iconTheme: IconThemeData(color: colorScheme.onPrimary, size: 36),
       ),
       cardTheme: CardThemeData(
         color: colorScheme.secondaryContainer,
@@ -74,10 +70,7 @@ class MyTheme {
           fontWeight: FontWeight.bold,
           color: colorSchemeDark.primary,
         ),
-        iconTheme: IconThemeData(
-          color: colorScheme.onPrimary,
-          size: 36,
-        ),
+        iconTheme: IconThemeData(color: colorScheme.onPrimary, size: 36),
       ),
       cardTheme: CardThemeData(
         color: colorSchemeDark.secondaryContainer,
