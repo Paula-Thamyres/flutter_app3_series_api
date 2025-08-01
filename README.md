@@ -8,9 +8,9 @@ Desenvolvido por [Paula-Thamyres](https://github.com/Paula-Thamyres)
 
 ## 🧱 Estrutura do Projeto
 
-### `lib/models/serie_model.dart`
+### `lib/tv_show_model.dart`
 
-Define a estrutura de dados da série por meio da **classe `SerieModel`**, contendo os principais atributos:
+Define a estrutura de dados da série por meio da **classe `TvShowModel`**, contendo os principais atributos:
 
 - `id`
 - `titulo`
