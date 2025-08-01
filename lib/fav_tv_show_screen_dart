@@ -11,11 +11,32 @@ class FavTvShowScreen extends StatefulWidget {
 }
 
 class _FavTvShowScreenState extends State<FavTvShowScreen> {
+
+  @override
+  void initState(){
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallBack((_) {
+      context.read<TvShowModel>().initialize();
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     var tvShows = context.watch<TvShowModel>().tvShows;
 
-    return Container(
+  return Consumer<TvShowModel> (
+      builder: (context, viewModel, child) {
+        if (viewModel.isLoading){
+        return Center(
+              child: SizedBox(
+                height: 96,
+                width: 96,
+                child: CircularProgressIndicator(strokeWidth: 12),
+              ),
+            );
+          };
+
+  return Container(
       padding: EdgeInsets.all(16),
       child: Column(
         children: [
@@ -28,5 +49,7 @@ class _FavTvShowScreenState extends State<FavTvShowScreen> {
         ],
       ),
     );
+      }
+    ); 
   }
 }
